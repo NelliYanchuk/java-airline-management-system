@@ -12,8 +12,14 @@ public class Airport {
     private String name;
     private String location;
 
-    // constructor
-    public Airport() {
+    // Default constructor
+    public Airport() {}
+
+    // Constructor with parameters
+    public Airport(Long id, String name, String location) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
     }
 
     // Getters and setters
