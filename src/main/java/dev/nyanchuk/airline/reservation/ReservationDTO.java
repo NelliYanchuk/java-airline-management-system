@@ -1,26 +1,25 @@
 package dev.nyanchuk.airline.reservation;
 
+import dev.nyanchuk.airline.flight.Flight;
+import dev.nyanchuk.airline.user.User;
 import java.time.LocalDateTime;
 
 public class ReservationDTO {
     private Long id;
-    private Long userId;
-    private Long flightId;
+    private User user;
+    private Flight flight;
     private LocalDateTime reservationDate;
     private String status;
 
-    // Constructors
-    public ReservationDTO() {}
-
-    public ReservationDTO(Long id, Long userId, Long flightId, LocalDateTime reservationDate, String status) {
+    // Constructor, getters, and setters
+    public ReservationDTO(Long id, User user, Flight flight, LocalDateTime reservationDate, String status) {
         this.id = id;
-        this.userId = userId;
-        this.flightId = flightId;
+        this.user = user;
+        this.flight = flight;
         this.reservationDate = reservationDate;
         this.status = status;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -29,20 +28,20 @@ public class ReservationDTO {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Long getFlightId() {
-        return flightId;
+    public Flight getFlight() {
+        return flight;
     }
 
-    public void setFlightId(Long flightId) {
-        this.flightId = flightId;
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
 
     public LocalDateTime getReservationDate() {

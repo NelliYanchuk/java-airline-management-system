@@ -68,4 +68,7 @@ dev.nyanchuk.airline
 ├── home
 │   ├── HomeController.java
 │
+├── common/
+│   ├── GlobalExceptionHandler.java
+│
 └── AirlineApplication.java

@@ -1,20 +1,20 @@
 package dev.nyanchuk.airline.flight;
 
 import java.time.LocalDateTime;
+import dev.nyanchuk.airline.airport.*;
 
 public class FlightDTO {
     private Long id;
-    private String origin;
-    private String destination;
+    private Airport origin;
+    private Airport destination;
     private LocalDateTime departureDate;
     private LocalDateTime arrivalDate;
     private int availableSeats;
     private boolean status;
 
-    // Constructors
-    public FlightDTO() {}
-
-    public FlightDTO(Long id, String origin, String destination, LocalDateTime departureDate, LocalDateTime arrivalDate, int availableSeats, boolean status) {
+    // Constructor, getters, and setters
+    public FlightDTO(Long id, Airport origin, Airport destination, LocalDateTime departureDate,
+                     LocalDateTime arrivalDate, int availableSeats, boolean status) {
         this.id = id;
         this.origin = origin;
         this.destination = destination;
@@ -24,7 +24,7 @@ public class FlightDTO {
         this.status = status;
     }
 
-    // Getters and Setters
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -33,19 +33,19 @@ public class FlightDTO {
         this.id = id;
     }
 
-    public String getOrigin() {
+    public Airport getOrigin() {
         return origin;
     }
 
-    public void setOrigin(String origin) {
+    public void setOrigin(Airport origin) {
         this.origin = origin;
     }
 
-    public String getDestination() {
+    public Airport getDestination() {
         return destination;
     }
 
-    public void setDestination(String destination) {
+    public void setDestination(Airport destination) {
         this.destination = destination;
     }
 
