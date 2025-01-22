@@ -1,28 +1,44 @@
-dev.nyanchuk.airport
+dev.nyanchuk.airline
 │
 ├── user
 │   ├── User.java
 │   ├── UserRepository.java
 │   ├── UserService.java
 │   ├── UserController.java
+│   ├── UserDTO.java
+│   ├── exception
+│       ├── UserNotFoundException.java
+│       ├── UserValidationException.java
 │
 ├── flight
 │   ├── Flight.java
 │   ├── FlightRepository.java
 │   ├── FlightService.java
 │   ├── FlightController.java
+│   ├── FlightDTO.java
+│   ├── exception
+│       ├── FlightNotFoundException.java
+│       ├── FlightValidationException.java
 │
 ├── reservation
 │   ├── Reservation.java
 │   ├── ReservationRepository.java
 │   ├── ReservationService.java
 │   ├── ReservationController.java
+│   ├── ReservationDTO.java
+│   ├── exception
+│       ├── ReservationNotFoundException.java
+│       ├── ReservationValidationException.java
 │
 ├── airport
 │   ├── Airport.java
 │   ├── AirportRepository.java
 │   ├── AirportService.java
 │   ├── AirportController.java
+│   ├── AirportDTO.java
+│   ├── exception
+│       ├── AirportNotFoundException.java
+│       ├── AirportValidationException.java
 │
 ├── auth
 │   ├── AuthController.java
@@ -52,4 +68,4 @@ dev.nyanchuk.airport
 ├── home
 │   ├── HomeController.java
 │
-└── AirlineManagementApplication.java
+└── AirlineApplication.java
