@@ -1,6 +1,7 @@
 package dev.nyanchuk.airline.user;
 
 import jakarta.persistence.*;
+import dev.nyanchuk.airline.security.Role;
 
 @Entity
 @Table(name = "users")
@@ -11,13 +12,15 @@ public class User {
 
     private String username;
     private String password;
-    private String role;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     // constructor
     public User() {
     }
 
-    public User(Long id, String name, String password, String role) {
+    public User(Long id, String name, String password, Role role) {
         this.id = id;
         this.username = name;
         this.password = password;
@@ -49,11 +52,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }

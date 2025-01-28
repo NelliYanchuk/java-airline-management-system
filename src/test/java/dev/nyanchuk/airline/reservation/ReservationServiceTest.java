@@ -4,6 +4,7 @@ import dev.nyanchuk.airline.flight.Flight;
 import dev.nyanchuk.airline.user.User;
 import dev.nyanchuk.airline.airport.Airport;
 import dev.nyanchuk.airline.reservation.exception.ReservationNotFoundException;
+import dev.nyanchuk.airline.security.Role;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -40,7 +41,7 @@ class ReservationServiceTest {
         user = new User();
         user.setId(1L);
         user.setUsername("testuser");
-        user.setRole("USER");
+        user.setRole(Role.USER); // Use Role enum instead of String
 
         originAirport = new Airport();
         originAirport.setId(1L);

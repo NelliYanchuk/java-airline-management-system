@@ -1,16 +1,26 @@
 package dev.nyanchuk.airline.user;
 
+import dev.nyanchuk.airline.security.Role;
+
 public class UserDTO {
     private Long id;
     private String username;
-    private String role;
+    private String password;
+    private Role role;
 
     // Constructors
     public UserDTO() {}
 
-    public UserDTO(Long id, String username, String role) {
+    public UserDTO(Long id, String username, Role role) {  // Existing constructor
         this.id = id;
         this.username = username;
+        this.role = role;
+    }
+
+    public UserDTO(Long id, String username, String password, Role role) {  // New constructor
+        this.id = id;
+        this.username = username;
+        this.password = password;
         this.role = role;
     }
 
@@ -31,11 +41,19 @@ public class UserDTO {
         this.username = username;
     }
 
-    public String getRole() {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }

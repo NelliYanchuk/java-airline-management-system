@@ -1,11 +1,13 @@
 package dev.nyanchuk.airline.user;
 
 import dev.nyanchuk.airline.user.exception.UserNotFoundException;
+import dev.nyanchuk.airline.security.Role; // Import the Role enum
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
@@ -20,6 +22,9 @@ class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private PasswordEncoder passwordEncoder; // Mock the PasswordEncoder
+
     @InjectMocks
     private UserService userService;
 
@@ -33,22 +38,25 @@ class UserServiceTest {
         user = new User();
         user.setId(1L);
         user.setUsername("testuser");
-        user.setRole("USER");
+        user.setRole(Role.USER); // Use Role enum instead of String
 
         userDTO = new UserDTO();
         userDTO.setId(1L);
         userDTO.setUsername("testuser");
-        userDTO.setRole("USER");
+        userDTO.setRole(Role.USER); // Use Role enum instead of String
+        userDTO.setPassword("password"); // Set a password for the userDTO
     }
 
     @Test
     void testCreateUser() {
+        when(passwordEncoder.encode(any(CharSequence.class))).thenReturn("encodedPassword"); // Mock the encode method
         when(userRepository.save(any(User.class))).thenReturn(user);
 
         UserDTO createdUser = userService.createUser(userDTO);
 
         assertEquals(userDTO.getUsername(), createdUser.getUsername());
         assertEquals(userDTO.getRole(), createdUser.getRole());
+        verify(passwordEncoder, times(1)).encode(any(CharSequence.class)); // Verify that the encode method was called
         verify(userRepository, times(1)).save(any(User.class));
     }
 
