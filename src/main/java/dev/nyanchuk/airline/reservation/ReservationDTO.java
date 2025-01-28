@@ -11,13 +11,25 @@ public class ReservationDTO {
     private LocalDateTime reservationDate;
     private String status;
 
-    // Constructor, getters, and setters
+    // Default constructor
+    public ReservationDTO() {
+    }
+
+    // Constructors, getters, and setters
     public ReservationDTO(Long id, User user, Flight flight, LocalDateTime reservationDate, String status) {
         this.id = id;
         this.user = user;
         this.flight = flight;
         this.reservationDate = reservationDate;
         this.status = status;
+    }
+
+    public ReservationDTO(Long id, Long flightId, String passengerName) {
+        this.id = id;
+        this.user = new User(id, passengerName, null, null);
+        this.flight = new Flight(flightId, null, null, null, null, 0, false);
+        this.reservationDate = LocalDateTime.now();
+        this.status = "PENDING";
     }
 
     public Long getId() {

@@ -24,8 +24,19 @@ public class Flight {
     private int availableSeats;
     private boolean status; // true for available, false for not available
 
-    // constructor
+    // Default constructor
     public Flight() {
+    }
+
+    // Constructor with all fields
+    public Flight(Long id, Airport origin, Airport destination, LocalDateTime departureDate, LocalDateTime arrivalDate, int availableSeats, boolean status) {
+        this.id = id;
+        this.origin = origin;
+        this.destination = destination;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
+        this.availableSeats = availableSeats;
+        this.status = status;
     }
 
     // Getters and setters
