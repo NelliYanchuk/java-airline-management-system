@@ -1,6 +1,6 @@
 package dev.nyanchuk.airline.user;
 
-import dev.nyanchuk.airline.security.Role;
+import dev.nyanchuk.airline.role.Role;
 
 public class UserDTO {
     private Long id;

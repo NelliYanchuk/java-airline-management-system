@@ -1,7 +1,7 @@
 package dev.nyanchuk.airline.user;
 
+import dev.nyanchuk.airline.role.Role;
 import jakarta.persistence.*;
-import dev.nyanchuk.airline.security.Role;
 
 @Entity
 @Table(name = "users")

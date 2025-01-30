@@ -1,4 +1,4 @@
-package dev.nyanchuk.airline.security;
+package dev.nyanchuk.airline.role;
 
 public enum Role {
     USER,

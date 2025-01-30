@@ -1,3 +1,4 @@
+```
 dev.nyanchuk.airline
 │
 ├── user
@@ -8,7 +9,6 @@ dev.nyanchuk.airline
 │   ├── UserDTO.java
 │   ├── exception
 │       ├── UserNotFoundException.java
-│       ├── UserValidationException.java
 │
 ├── flight
 │   ├── Flight.java
@@ -18,7 +18,6 @@ dev.nyanchuk.airline
 │   ├── FlightDTO.java
 │   ├── exception
 │       ├── FlightNotFoundException.java
-│       ├── FlightValidationException.java
 │
 ├── reservation
 │   ├── Reservation.java
@@ -28,7 +27,6 @@ dev.nyanchuk.airline
 │   ├── ReservationDTO.java
 │   ├── exception
 │       ├── ReservationNotFoundException.java
-│       ├── ReservationValidationException.java
 │
 ├── airport
 │   ├── Airport.java
@@ -38,12 +36,6 @@ dev.nyanchuk.airline
 │   ├── AirportDTO.java
 │   ├── exception
 │       ├── AirportNotFoundException.java
-│       ├── AirportValidationException.java
-│
-├── auth
-│   ├── AuthController.java
-│   ├── JwtUtil.java
-│   ├── JwtRequestFilter.java
 │
 ├── config
 │   ├── SecurityConfig.java
@@ -62,13 +54,21 @@ dev.nyanchuk.airline
 │   ├── RoleRepository.java
 │
 ├── security
-│   ├── CustomUserDetailsService.java
-│   ├── JwtAuthenticationEntryPoint.java
-│
-├── home
-│   ├── HomeController.java
+│   ├── SecurityConfig.java
 │
 ├── common/
 │   ├── GlobalExceptionHandler.java
 │
 └── AirlineApplication.java
+```
+
+
+├── security
+│   ├── SecurityConfig.java
+!   ├── CustomUserDetailsService.java
+!   ├── JwtAuthenticationEntryPoint.java
+
+├── auth
+│   ├── AuthController.java
+│   ├── JwtUtil.java
+│   ├── JwtRequestFilter.java

@@ -1,7 +1,8 @@
 package dev.nyanchuk.airline.user;
 
+import dev.nyanchuk.airline.role.Role;
 import dev.nyanchuk.airline.user.exception.UserNotFoundException;
-import dev.nyanchuk.airline.security.Role; // Import the Role enum
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
