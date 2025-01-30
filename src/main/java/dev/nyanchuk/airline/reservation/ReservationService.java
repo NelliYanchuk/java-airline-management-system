@@ -1,6 +1,8 @@
 package dev.nyanchuk.airline.reservation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,30 +20,57 @@ public class ReservationService {
         return toDTO(reservationRepository.save(reservation));
     }
 
-    public List<ReservationDTO> getAllReservations() {
-        return reservationRepository.findAll().stream()
-                .map(this::toDTO)
-                .collect(Collectors.toList());
+    public List<ReservationDTO> getAllReservations(Authentication authentication) {
+        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            return reservationRepository.findAll().stream()
+                    .map(this::toDTO)
+                    .collect(Collectors.toList());
+        } else {
+            String username = authentication.getName();
+            return reservationRepository.findByUserUsername(username).stream()
+                    .map(this::toDTO)
+                    .collect(Collectors.toList());
+        }
     }
 
-    public ReservationDTO getReservationById(Long id) {
+    public ReservationDTO getReservationById(Long id, Authentication authentication) {
         Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new ReservationNotFoundException(id));
-        return toDTO(reservation);
+        
+        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")) ||
+            reservation.getUser().getUsername().equals(authentication.getName())) {
+            return toDTO(reservation);
+        } else {
+            throw new AccessDeniedException("You do not have permission to access this reservation.");
+        }
     }
 
-    public ReservationDTO updateReservation(Long id, ReservationDTO reservationDetails) {
+    public ReservationDTO updateReservation(Long id, ReservationDTO reservationDetails, Authentication authentication) {
         Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new ReservationNotFoundException(id));
-        reservation.setUser(reservationDetails.getUser());
-        reservation.setFlight(reservationDetails.getFlight());
-        reservation.setReservationDate(reservationDetails.getReservationDate());
-        reservation.setStatus(reservationDetails.getStatus());
-        return toDTO(reservationRepository.save(reservation));
+        
+        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")) ||
+            reservation.getUser().getUsername().equals(authentication.getName())) {
+            reservation.setUser(reservationDetails.getUser());
+            reservation.setFlight(reservationDetails.getFlight());
+            reservation.setReservationDate(reservationDetails.getReservationDate());
+            reservation.setStatus(reservationDetails.getStatus());
+            return toDTO(reservationRepository.save(reservation));
+        } else {
+            throw new AccessDeniedException("You do not have permission to update this reservation.");
+        }
     }
 
-    public void deleteReservation(Long id) {
-        reservationRepository.deleteById(id);
+    public void deleteReservation(Long id, Authentication authentication) {
+        Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new ReservationNotFoundException(id));
+        
+        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")) ||
+            reservation.getUser().getUsername().equals(authentication.getName())) {
+            reservationRepository.deleteById(id);
+        } else {
+            throw new AccessDeniedException("You do not have permission to delete this reservation.");
+        }
     }
 
     private ReservationDTO toDTO(Reservation reservation) {

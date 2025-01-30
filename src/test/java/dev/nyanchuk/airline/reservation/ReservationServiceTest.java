@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.core.Authentication;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -28,6 +29,9 @@ class ReservationServiceTest {
     @InjectMocks
     private ReservationService reservationService;
 
+    @Mock
+    private Authentication authentication;
+
     private Reservation reservation;
     private ReservationDTO reservationDTO;
     private User user;
@@ -42,7 +46,7 @@ class ReservationServiceTest {
         user = new User();
         user.setId(1L);
         user.setUsername("testuser");
-        user.setRole(Role.USER); // Use Role enum instead of String
+        user.setRole(Role.USER);
 
         originAirport = new Airport();
         originAirport.setId(1L);
@@ -71,6 +75,9 @@ class ReservationServiceTest {
         reservation.setStatus("CONFIRMED");
 
         reservationDTO = new ReservationDTO(1L, user, flight, LocalDateTime.now(), "CONFIRMED");
+
+        // Mock the authentication object
+        when(authentication.getName()).thenReturn("testuser");
     }
 
     @Test
@@ -89,7 +96,7 @@ class ReservationServiceTest {
     void testGetReservationById() {
         when(reservationRepository.findById(1L)).thenReturn(Optional.of(reservation));
 
-        ReservationDTO retrievedReservation = reservationService.getReservationById(1L);
+        ReservationDTO retrievedReservation = reservationService.getReservationById(1L, authentication);
 
         assertEquals(reservationDTO.getUser().getId(), retrievedReservation.getUser().getId());
         assertEquals(reservationDTO.getFlight().getId(), retrievedReservation.getFlight().getId());
@@ -101,7 +108,7 @@ class ReservationServiceTest {
         when(reservationRepository.findById(1L)).thenReturn(Optional.of(reservation));
         when(reservationRepository.save(any(Reservation.class))).thenReturn(reservation);
 
-        ReservationDTO updatedReservation = reservationService.updateReservation(1L, reservationDTO);
+        ReservationDTO updatedReservation = reservationService.updateReservation(1L, reservationDTO, authentication);
 
         assertEquals(reservationDTO.getUser().getId(), updatedReservation.getUser().getId());
         assertEquals(reservationDTO.getFlight().getId(), updatedReservation.getFlight().getId());
@@ -112,9 +119,10 @@ class ReservationServiceTest {
 
     @Test
     void testDeleteReservation() {
+        when(reservationRepository.findById(1L)).thenReturn(Optional.of(reservation));
         doNothing().when(reservationRepository).deleteById(1L);
 
-        reservationService.deleteReservation(1L);
+        reservationService.deleteReservation(1L, authentication);
 
         verify(reservationRepository, times(1)).deleteById(1L);
     }
@@ -122,6 +130,6 @@ class ReservationServiceTest {
     @Test
     void testGetReservationById_NotFound() {
         when(reservationRepository.findById(1L)).thenReturn(Optional.empty());
-        assertThrows(ReservationNotFoundException.class, () -> reservationService.getReservationById(1L));
+        assertThrows(ReservationNotFoundException.class, () -> reservationService.getReservationById(1L, authentication));
     }
 }

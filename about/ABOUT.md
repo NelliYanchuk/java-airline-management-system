@@ -62,13 +62,9 @@ dev.nyanchuk.airline
 └── AirlineApplication.java
 ```
 
+Admin Users: 
+Can access and modify any endpoint (/api/users/**, /api/airports/**, /api/flights/**, /api/reservations/**).
 
-├── security
-│   ├── SecurityConfig.java
-!   ├── CustomUserDetailsService.java
-!   ├── JwtAuthenticationEntryPoint.java
-
-├── auth
-│   ├── AuthController.java
-│   ├── JwtUtil.java
-│   ├── JwtRequestFilter.java
+Regular Users:
+Can read flights and airports (/api/flights/**, /api/airports/**).
+Can read and update only their own reservations (/api/reservations/**).

@@ -20,8 +20,9 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/airports/**").hasRole("ADMIN")
-                .requestMatchers("/api/users/**").permitAll()
+                .requestMatchers("/api/airports/**", "/api/flights/**").permitAll()
+                .requestMatchers("/api/users/**").hasRole("ADMIN")
+                .requestMatchers("/api/reservations/**").authenticated()
                 .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults()); // Configure HTTP Basic authentication
