@@ -2,6 +2,7 @@ package dev.nyanchuk.airline.reservation;
 
 import dev.nyanchuk.airline.flight.Flight;
 import dev.nyanchuk.airline.user.User;
+import dev.nyanchuk.airline.role.Role; // Import Role enum
 import java.time.LocalDateTime;
 
 public class ReservationDTO {
@@ -15,7 +16,7 @@ public class ReservationDTO {
     public ReservationDTO() {
     }
 
-    // Constructors, getters, and setters
+    // Constructor with all fields
     public ReservationDTO(Long id, User user, Flight flight, LocalDateTime reservationDate, String status) {
         this.id = id;
         this.user = user;
@@ -24,14 +25,17 @@ public class ReservationDTO {
         this.status = status;
     }
 
+    // Constructor for minimal reservation creation
     public ReservationDTO(Long id, Long flightId, String passengerName) {
         this.id = id;
-        this.user = new User(id, passengerName, null, null);
+        // Use existing constructor with default values for password, role, and profileImageUrl
+        this.user = new User(id, passengerName, null, Role.USER, null);
         this.flight = new Flight(flightId, null, null, null, null, 0, false);
         this.reservationDate = LocalDateTime.now();
         this.status = "PENDING";
     }
 
+    // Getters and setters
     public Long getId() {
         return id;
     }

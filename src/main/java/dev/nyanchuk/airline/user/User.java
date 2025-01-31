@@ -16,15 +16,18 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String profileImageUrl; // URL for the profile image
+
     // constructor
     public User() {
     }
 
-    public User(Long id, String name, String password, Role role) {
+    public User(Long id, String name, String password, Role role, String profileImageUrl) {
         this.id = id;
         this.username = name;
         this.password = password;
         this.role = role;
+        this.profileImageUrl = profileImageUrl;
     }
 
     // Getters and setters
@@ -58,5 +61,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 }

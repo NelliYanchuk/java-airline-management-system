@@ -20,9 +20,17 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/airports/**", "/api/flights/**").permitAll()
-                .requestMatchers("/api/users/**").hasRole("ADMIN")
-                .requestMatchers("/api/reservations/**").authenticated()
+                // Allow all users to register and upload their profile images
+                .requestMatchers("/api/auth/register", "/api/auth/login", "/api/profile/upload").permitAll()
+                // Allow ADMIN to perform CRUD operations on airports and flights
+                .requestMatchers("/api/airports/**").hasRole("ADMIN")
+                .requestMatchers("/api/flights/**").hasRole("ADMIN")
+                // Allow ADMIN to view reservation summaries and user reservation history
+                .requestMatchers("/api/reservations/summary").hasRole("ADMIN")
+                .requestMatchers("/api/reservations/history/**").hasRole("ADMIN")
+                // Allow authenticated users to view their own reservations
+                .requestMatchers("/api/reservations/mine").hasRole("USER")
+                // All other requests need to be authenticated
                 .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults()); // Configure HTTP Basic authentication

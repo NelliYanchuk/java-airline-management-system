@@ -12,7 +12,7 @@ INSERT INTO users (username, password, role) VALUES ('user5', 'password5', 'USER
 -- Insert sample airports
 INSERT INTO airports (id, name, location) VALUES (1, 'John F. Kennedy International Airport', 'New York, USA');
 INSERT INTO airports (id, name, location) VALUES (2, 'Los Angeles International Airport', 'Los Angeles, USA');
-INSERT INTO airports (id, name, location) VALUES (3, 'Chicago O\'Hare International Airport', 'Chicago, USA');
+INSERT INTO airports (id, name, location) VALUES (3, 'Chicago OHare International Airport', 'Chicago, USA');
 INSERT INTO airports (id, name, location) VALUES (4, 'Hartsfield-Jackson Atlanta International Airport', 'Atlanta, USA');
 INSERT INTO airports (id, name, location) VALUES (5, 'Dallas/Fort Worth International Airport', 'Dallas, USA');
 

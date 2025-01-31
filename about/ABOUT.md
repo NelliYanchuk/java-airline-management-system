@@ -62,9 +62,87 @@ dev.nyanchuk.airline
 └── AirlineApplication.java
 ```
 
-Admin Users: 
-Can access and modify any endpoint (/api/users/**, /api/airports/**, /api/flights/**, /api/reservations/**).
+classDiagram
+    class Airport {
+        Long id
+        String name
+        String location
+        +getId(): Long
+        +setId(Long): void
+        +getName(): String
+        +setName(String): void
+        +getLocation(): String
+        +setLocation(String): void
+    }
 
-Regular Users:
-Can read flights and airports (/api/flights/**, /api/airports/**).
-Can read and update only their own reservations (/api/reservations/**).
+    class Flight {
+        Long id
+        Airport origin
+        Airport destination
+        LocalDateTime departureDate
+        LocalDateTime arrivalDate
+        int availableSeats
+        boolean status
+        +getId(): Long
+        +setId(Long): void
+        +getOrigin(): Airport
+        +setOrigin(Airport): void
+        +getDestination(): Airport
+        +setDestination(Airport): void
+        +getDepartureDate(): LocalDateTime
+        +setDepartureDate(LocalDateTime): void
+        +getArrivalDate(): LocalDateTime
+        +setArrivalDate(LocalDateTime): void
+        +getAvailableSeats(): int
+        +setAvailableSeats(int): void
+        +isStatus(): boolean
+        +setStatus(boolean): void
+    }
+
+    class Reservation {
+        Long id
+        User user
+        Flight flight
+        LocalDateTime reservationDate
+        String status
+        +getId(): Long
+        +setId(Long): void
+        +getUser(): User
+        +setUser(User): void
+        +getFlight(): Flight
+        +setFlight(Flight): void
+        +getReservationDate(): LocalDateTime
+        +setReservationDate(LocalDateTime): void
+        +getStatus(): String
+        +setStatus(String): void
+    }
+
+    class User {
+        Long id
+        String username
+        String password
+        Role role
+        String profileImageUrl
+        +getId(): Long
+        +setId(Long): void
+        +getUsername(): String
+        +setUsername(String): void
+        +getPassword(): String
+        +setPassword(String): void
+        +getRole(): Role
+        +setRole(Role): void
+        +getProfileImageUrl(): String
+        +setProfileImageUrl(String): void
+    }
+
+    class Role {
+        <<enumeration>>
+        USER
+        ADMIN
+    }
+
+    Flight "1" --> "1" Airport : origin
+    Flight "1" --> "1" Airport : destination
+    Reservation "1" --> "1" Flight
+    Reservation "1" --> "1" User
+    User "1" --> "1" Role
