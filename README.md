@@ -50,23 +50,64 @@ The system are not allow the selection of flights without available seats or tho
 - **Availability:** Implement tests to ensure system stability in production.
 
 ### Public Endpoints:
-
 - /api/auth/register: Endpoint for user registration.
 - /api/auth/login: Endpoint for user login.
 - /api/profile/upload: Endpoint for uploading profile images.
 
-
 **ADMIN Endpoints:**
-
 - /api/airports/*: Full CRUD operations on airports.
 - /api/flights/*: Full CRUD operations on flights.
 - /api/reservations/summary: Summary list of reservations.
 - /api/reservations/history/*: Reservation history for each user.
 
-
 **USER Endpoints:**
-
 - /api/reservations/mine: View their own reservations with flight information.
 
 **Authentication Requirement:**
 - All other endpoints require authentication.
+
+## How to Run
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/NelliYanchuk/java-airline-management-system.git
+    ```
+
+2. Navigate to the project directory:
+    ```bash
+    cd java-airline-management-system
+    ```
+
+3. Compile and run the project using your preferred Java IDE or the command line:
+    ```bash
+    javac src/dev/nyanchuk/airline/*.java
+    java dev.nyanchuk.airline.AirlineApplication
+    ```
+
+4. To run tests, use JUnit with your preferred testing tool:
+    ```bash
+    java -cp .:junit.jar org.junit.runner.JUnitCore dev.nyanchuk.airline.services.FlightServiceTest
+    ```
+
+## Testing
+
+The project uses **JUnit 5** for unit tests.
+
+### Running Tests
+
+To run the tests, use the following Maven command:
+
+    mvn test
+
+### Test Coverage
+
+<img src="about/test_cover.png" alt="Test Coverage" width="35%">
+
+## Diagrams
+- **Class Diagram**:
+<img src="about/class_diagram.png" alt="Class Diagram" width="55%">
+
+- **Chen Diagram**:
+<img src="about/diagramChen.png" alt="Chen Diagram" width="75%">
+
+## Contact me with:
+**Nelli Yanchuk**   [GitHub](https://github.com/NelliYanchuk) / [LinkedIn](https://www.linkedin.com/in/nelli-yanchuk-a24b81138/)
